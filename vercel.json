@@ -2,5 +2,5 @@
   "buildCommand": "cd snake && npm install && npm run build",
   "outputDirectory": "snake/dist",
   "devCommand": "cd snake && npm run dev",
-  "installCommand": "cd snake && npm install"
+  "installCommand": "npm install && cd snake && npm install"
 }
