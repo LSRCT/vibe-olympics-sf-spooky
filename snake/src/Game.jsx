@@ -22,6 +22,8 @@ export default function Game() {
   const [gameOver, setGameOver] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
   const directionRef = useRef(INITIAL_DIRECTION)
+  const [playerId] = useState(() => Math.random().toString(36).substr(2, 9))
+  const [otherPlayers, setOtherPlayers] = useState({})
 
   // Generate random powerup
   const spawnPowerup = () => {
@@ -109,7 +111,14 @@ export default function Game() {
           }
           // Speed powerup just gives points, no special effect in single player
 
-          spawnPowerup()
+          // Claim powerup on backend
+          fetch('/api/game-state', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ playerId, snake, score, claimPowerup: true })
+          })
+
+          setPowerup(null) // Clear locally until backend responds
         }
 
         // Remove tail if not growing
@@ -128,6 +137,44 @@ export default function Game() {
 
     return () => clearInterval(gameLoop)
   }, [gameStarted, gameOver, powerup])
+
+  // Sync game state with backend
+  useEffect(() => {
+    if (!gameStarted || gameOver) return
+
+    const syncInterval = setInterval(async () => {
+      try {
+        // Send our state to backend
+        await fetch('/api/game-state', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ playerId, snake, score })
+        })
+
+        // Get other players + shared powerup
+        const res = await fetch('/api/game-state')
+        const data = await res.json()
+
+        // Update other players (exclude ourselves)
+        const others = {}
+        Object.entries(data.players || {}).forEach(([id, playerData]) => {
+          if (id !== playerId) {
+            others[id] = playerData
+          }
+        })
+        setOtherPlayers(others)
+
+        // Update shared powerup (if different from local)
+        if (data.powerup) {
+          setPowerup(data.powerup)
+        }
+      } catch (err) {
+        console.error('Sync failed:', err)
+      }
+    }, 150) // Poll every 150ms (matches game speed)
+
+    return () => clearInterval(syncInterval)
+  }, [gameStarted, gameOver, snake, score, playerId])
 
   // Render
   useEffect(() => {
@@ -165,6 +212,26 @@ export default function Game() {
       )
     })
 
+    // Draw other players
+    Object.entries(otherPlayers).forEach(([id, playerData], playerIndex) => {
+      const colors = [
+        { head: '#ff00ff', body: '#cc00cc' }, // Purple
+        { head: '#00ffff', body: '#00cccc' }, // Cyan
+        { head: '#ffff00', body: '#cccc00' }, // Yellow
+      ]
+      const color = colors[playerIndex % colors.length]
+
+      playerData.snake.forEach((segment, i) => {
+        ctx.fillStyle = i === 0 ? color.head : color.body
+        ctx.fillRect(
+          segment.x * CELL_SIZE + 1,
+          segment.y * CELL_SIZE + 1,
+          CELL_SIZE - 2,
+          CELL_SIZE - 2
+        )
+      })
+    })
+
     // Draw powerup
     if (powerup) {
       ctx.fillStyle = powerup.type.color
@@ -178,7 +245,7 @@ export default function Game() {
       )
       ctx.fill()
     }
-  }, [snake, powerup])
+  }, [snake, powerup, otherPlayers])
 
   return (
     <div style={{
@@ -194,7 +261,7 @@ export default function Game() {
       <h1 style={{ marginBottom: '20px' }}>🐍 Sssnake Game</h1>
 
       <div style={{ marginBottom: '10px', fontSize: '24px', fontWeight: 'bold' }}>
-        Score: {score} | Length: {snake.length}
+        Score: {score} | Length: {snake.length} | Players: {Object.keys(otherPlayers).length + 1}
       </div>
 
       <canvas
