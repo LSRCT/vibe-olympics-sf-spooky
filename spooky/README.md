@@ -2,21 +2,24 @@
 
 A spooky audio walking tour generator for San Francisco, built for the Vibe Coding Olympics!
 
-## 🎃 Features (Phase 1 - MVP)
+## 🎃 Features
 
+- ✅ **Authentication**: User account creation, login/logout with Supabase
+- ✅ **Guest Mode**: Continue without account for quick access
 - ✅ Beautiful, spooky-themed landing page
 - ✅ Tour description input form
 - ✅ Generated haunted tour with 5 spooky stops
 - ✅ Mock data displaying SF's most haunted locations
 - ✅ Fast, responsive React frontend
-- ✅ Deployed on Vercel
+- ✅ User session persistence
+- ✅ Ready for Vercel deployment
 
 ## 🏗️ Tech Stack
 
 - **Framework**: React 18 + TypeScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS v3
-- **Backend**: Supabase (configured, not yet integrated)
+- **Backend**: Supabase (Auth integrated ✅)
 - **Deployment**: Vercel
 
 ## 🚀 Getting Started
@@ -48,10 +51,13 @@ npm run preview
 spooky/
 ├── src/
 │   ├── components/
+│   │   ├── Auth.tsx           # Login/signup component
 │   │   ├── LandingPage.tsx    # Main landing page
 │   │   ├── TourInput.tsx      # Tour description form
 │   │   └── TourDisplay.tsx    # Display generated tour
-│   ├── App.tsx                # Main app component
+│   ├── lib/
+│   │   └── supabase.ts        # Supabase client config
+│   ├── App.tsx                # Main app with auth
 │   ├── index.css              # Tailwind styles
 │   └── main.tsx               # Entry point
 ├── public/                     # Static assets
@@ -62,36 +68,41 @@ spooky/
 
 Current progress towards 10 points:
 
-- [ ] Account login (2 pts) - Coming in Phase 2
-- [ ] Generate SF Walking Audio Tours (2 pts) - Coming in Phase 2-3
-- [x] Make it haunted! (2 pts) - ✅ All tours are spooky!
-- [ ] Persistence (1 pt) - Coming in Phase 2
-- [ ] Map view (1 pt) - Coming in Phase 4
-- [ ] Location Image Generation (1 pt) - Coming in Phase 5
-- [ ] Story Image Generation (1 pt) - Coming in Phase 6
+- [x] **Account login (2 pts)** - ✅ Supabase auth with signup/login!
+- [ ] Generate SF Walking Audio Tours (2 pts) - Next priority
+- [x] **Make it haunted! (2 pts)** - ✅ All tours are spooky!
+- [ ] Persistence (1 pt) - Easy next step
+- [ ] Map view (1 pt) - Coming soon
+- [ ] Location Image Generation (1 pt) - Future
+- [ ] Story Image Generation (1 pt) - Future
 
-**Current Score: 2/10 points** (Spooky theme implemented!)
+**Current Score: 4/10 points** (40% complete!) 🎉
 
 ## 🗺️ Roadmap
 
-### Phase 2: Backend Integration
-- [ ] Supabase authentication
-- [ ] User account creation and login
+### Phase 2: Completed! ✅
+- [x] Supabase authentication
+- [x] User account creation and login
+- [x] Session management and logout
+- [x] Guest mode option
+
+### Phase 3: Persistence (Next!)
 - [ ] Save tours to database
 - [ ] Load saved tours
+- [ ] User tour history
 
-### Phase 3: AI-Powered Tours
+### Phase 4: AI-Powered Tours
 - [ ] OpenAI/Anthropic integration
 - [ ] Generate custom tours based on user input
 - [ ] Ensure all tours are spooky!
 - [ ] Audio generation (TTS)
 
-### Phase 4: Map Features
+### Phase 5: Map Features
 - [ ] Google Maps integration
 - [ ] Display tour stops on map
 - [ ] Interactive route visualization
 
-### Phase 5: Image Generation
+### Phase 6: Image Generation
 - [ ] Location images
 - [ ] Story-specific haunted images
 - [ ] Image caching
@@ -105,12 +116,14 @@ Current progress towards 10 points:
 
 ## 📝 Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the `spooky/` directory:
 
 ```env
-SUPABASE_URL=your_supabase_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
+
+**Note**: Vite requires env vars to be prefixed with `VITE_` to expose them to the client.
 
 ## 🚢 Deployment
 
