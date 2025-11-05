@@ -1,16 +1,16 @@
-# 🐍 Juego Sssnake
+# 🐍 Sssnake-Spiel
 
-Un juego de serpiente basado en React construido para la competencia Sssnake.
+Ein React-basiertes Schlangenschlacht-Spiel, das für den Sssnake-Wettbewerb entwickelt wurde.
 
-## Características
+## Funktionen
 
-✅ Mover serpiente con teclas de flecha
-✅ 3 potenciadores diferentes (crecer, velocidad, mega)
-✅ La serpiente crece cuando come potenciadores
-✅ Seguimiento de puntuación basado en puntos y longitud
-✅ Fin del juego al colisionar consigo mismo
+✅ Schlange mit Pfeiltasten bewegen
+✅ 3 verschiedene Power-ups (Wachstum, Geschwindigkeit, Mega)
+✅ Schlange wächst beim Sammeln von Power-ups
+✅ Punkteverfolgung basierend auf Punkten und Länge
+✅ Spielende durch Selbstkollision
 
-## Desarrollo
+## Entwicklung
 
 ```bash
 cd snake
@@ -18,21 +18,21 @@ npm install
 npm run dev
 ```
 
-## Despliegue
+## Bereitstellung
 
-Desplegar a Vercel:
+Auf Vercel bereitstellen:
 
 ```bash
 vercel --prod
 ```
 
-## Controles
+## Steuerung
 
-- **Teclas de flecha**: Mover la serpiente
-- **Espacio**: Reiniciar después del fin del juego
+- **Pfeiltasten**: Schlange bewegen
+- **Leertaste**: Nach Spielende neu starten
 
-## Potenciadores
+## Power-ups
 
-- 🔴 **Crecer** (+10 pts): Crecer 1 segmento
-- 🔵 **Velocidad** (+15 pts): Puntos de bonificación
-- 🟡 **Mega** (+25 pts): Crecer 3 segmentos
+- 🔴 **Wachstum** (+10 Pkt): 1 Segment hinzufügen
+- 🔵 **Geschwindigkeit** (+15 Pkt): Bonuspunkte
+- 🟡 **Mega** (+25 Pkt): 3 Segmente hinzufügen
