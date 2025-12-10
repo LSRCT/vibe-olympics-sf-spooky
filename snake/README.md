@@ -33,6 +33,6 @@ vercel --prod
 
 ## Power-Ups
 
-- 🔴 **Wachsen** (+10 Pkt): Um 1 Segment wachsen
-- 🔵 **Geschwindigkeit** (+15 Pkt): Bonuspunkte
-- 🟡 **Mega** (+25 Pkt): Um 3 Segmente wachsen
+- 🔴 **Wachsen** (+10 Pkt.): Um 1 Segment wachsen
+- 🔵 **Geschwindigkeit** (+15 Pkt.): Bonuspunkte
+- 🟡 **Mega** (+25 Pkt.): Um 3 Segmente wachsen
