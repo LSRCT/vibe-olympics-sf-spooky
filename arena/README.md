@@ -1,15 +1,15 @@
 # Vibe Arena Bot
 
-A simple bot that collects coins and avoids bombs in the Vibe Arena challenge.
+Ein einfacher Bot, der Münzen sammelt und Bomben in der Vibe Arena Herausforderung ausweicht.
 
-## Bot Strategy
+## Bot-Strategie
 
-The bot uses a simple scoring system:
-- **Avoid bombs**: Heavy penalty for moves near bombs
-- **Collect coins**: Bonus for moving towards the closest coin
-- **Stay safe**: Prioritizes survival over coin collection
+Der Bot verwendet ein einfaches Bewertungssystem:
+- **Bomben ausweichen**: Hohe Strafe für Züge in der Nähe von Bomben
+- **Münzen sammeln**: Bonus für Bewegung zur nächsten Münze
+- **Sicher bleiben**: Priorisiert Überleben gegenüber Münzsammlung
 
-## Local Testing
+## Lokales Testen
 
 ```bash
 cd arena
@@ -17,9 +17,9 @@ npm install
 npm start
 ```
 
-The server will run on `http://localhost:3000`
+Der Server läuft auf `http://localhost:3000`
 
-Test with a sample request:
+Mit einer Beispielanfrage testen:
 ```bash
 curl -X POST http://localhost:3000 \
   -H "Content-Type: application/json" \
@@ -33,39 +33,39 @@ curl -X POST http://localhost:3000 \
   }'
 ```
 
-## Deployment Options
+## Bereitstellungsoptionen
 
-### Option 1: Railway.app (Recommended - Free & Fast)
-1. Go to https://railway.app/
-2. Sign in with GitHub
-3. Click "New Project" → "Deploy from GitHub repo"
-4. Select this repository
-5. Set root directory to `arena`
-6. Railway will auto-detect and deploy
-7. Copy the public URL
+### Option 1: Railway.app (Empfohlen - Kostenlos & Schnell)
+1. Gehe zu https://railway.app/
+2. Mit GitHub anmelden
+3. Klicke auf "New Project" → "Deploy from GitHub repo"
+4. Wähle dieses Repository aus
+5. Setze das Stammverzeichnis auf `arena`
+6. Railway erkennt und deployt automatisch
+7. Kopiere die öffentliche URL
 
-### Option 2: Render.com (Free)
-1. Go to https://render.com/
-2. Create new "Web Service"
-3. Connect your GitHub repo
-4. Set:
-   - Root Directory: `arena`
-   - Build Command: `npm install`
-   - Start Command: `npm start`
-5. Deploy and copy the URL
+### Option 2: Render.com (Kostenlos)
+1. Gehe zu https://render.com/
+2. Erstelle einen neuen "Web Service"
+3. Verbinde dein GitHub-Repository
+4. Einstellungen:
+   - Stammverzeichnis: `arena`
+   - Build-Befehl: `npm install`
+   - Start-Befehl: `npm start`
+5. Deployen und URL kopieren
 
-### Option 3: Fly.io (Free tier)
+### Option 3: Fly.io (Kostenlose Stufe)
 ```bash
 cd arena
 fly launch
 fly deploy
 ```
 
-## API Endpoint
+## API-Endpunkt
 
-Your bot expects POST requests with the game state and responds with a move:
+Dein Bot erwartet POST-Anfragen mit dem Spielstatus und antwortet mit einem Zug:
 
-**Request:**
+**Anfrage:**
 ```json
 {
   "player": {"x": 5, "y": 5},
@@ -77,11 +77,11 @@ Your bot expects POST requests with the game state and responds with a move:
 }
 ```
 
-**Response:**
+**Antwort:**
 ```json
 {
   "move": "right"
 }
 ```
 
-Valid moves: `up`, `down`, `left`, `right`, `stay`
+Gültige Züge: `up`, `down`, `left`, `right`, `stay`
