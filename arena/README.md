@@ -5,8 +5,8 @@ A simple bot that collects coins and avoids bombs in the Vibe Arena challenge.
 ## Bot Strategy
 
 The bot uses a simple scoring system:
-- **Avoid bombs**: Heavy penalty for moves near bombs
-- **Collect coins**: Bonus for moving towards the closest coin
+- **Avoid bombs**: High penalty for moves near bombs
+- **Collect coins**: Bonus for moving toward the nearest coin
 - **Stay safe**: Prioritizes survival over coin collection
 
 ## Local Testing
@@ -17,7 +17,7 @@ npm install
 npm start
 ```
 
-The server will run on `http://localhost:3000`
+The server runs on `http://localhost:3000`
 
 Test with a sample request:
 ```bash
@@ -46,15 +46,15 @@ curl -X POST http://localhost:3000 \
 
 ### Option 2: Render.com (Free)
 1. Go to https://render.com/
-2. Create new "Web Service"
-3. Connect your GitHub repo
-4. Set:
-   - Root Directory: `arena`
-   - Build Command: `npm install`
-   - Start Command: `npm start`
-5. Deploy and copy the URL
+2. Create a new "Web Service"
+3. Connect your GitHub repository
+4. Settings:
+   - Root directory: `arena`
+   - Build command: `npm install`
+   - Start command: `npm start`
+5. Deploy and copy URL
 
-### Option 3: Fly.io (Free tier)
+### Option 3: Fly.io (Free Tier)
 ```bash
 cd arena
 fly launch
@@ -63,7 +63,7 @@ fly deploy
 
 ## API Endpoint
 
-Your bot expects POST requests with the game state and responds with a move:
+Your bot expects POST requests with game state and responds with a move:
 
 **Request:**
 ```json

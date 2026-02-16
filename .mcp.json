@@ -1,0 +1,7 @@
+{ "mcpServers": {
+  "hallucinating-splines": {
+      "type": "http",
+      "url": "https://mcp.hallucinatingsplines.com/mcp?key=hs_7536e776c95c37f2c1c9b855836a2af8e45103048a38b36f0447d847e0aae9ac"
+  }
+  }
+}
